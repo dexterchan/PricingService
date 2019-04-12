@@ -7,7 +7,7 @@ import time
 
 app = Flask(__name__)
 api = Api(app)
-PricingServiceLib = cdll.LoadLibrary("./build/libLibPricingService.so")
+PricingServiceLib = cdll.LoadLibrary("./build/libLibPricingService.dylib")
 PricingServiceLib.GenerateLoanSchedule.argtypes = [
     c_double,
     c_double,
