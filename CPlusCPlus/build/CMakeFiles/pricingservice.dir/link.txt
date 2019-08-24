@@ -1,0 +1,1 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -g -dynamiclib -Wl,-headerpad_max_install_names  -o libpricingservice.dylib -install_name @rpath/libpricingservice.dylib CMakeFiles/pricingservice.dir/main.cpp.o 

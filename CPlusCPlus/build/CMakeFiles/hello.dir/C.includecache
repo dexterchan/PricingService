@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/dexter/sandbox/CplusplusPractise/PricingService/PricingService/CPlusCPlus/PricingService.h
+
+/Users/dexter/sandbox/CplusplusPractise/PricingService/PricingService/CPlusCPlus/test.c
+PricingService.h
+/Users/dexter/sandbox/CplusplusPractise/PricingService/PricingService/CPlusCPlus/PricingService.h
+stdio.h
+-
+
