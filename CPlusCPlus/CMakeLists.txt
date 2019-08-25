@@ -6,9 +6,9 @@ set (CMAKE_CXX_STANDARD 11)
 include(CTest)
 enable_testing()
 
-#add_executable(pricingservice main.cpp)
-add_library(pricingservice SHARED main.cpp)
-#add_library(pricingservice STATIC main.cpp)
+#add_executable(pricingservice main.cpp mainGo.cpp)
+add_library(pricingservice SHARED main.cpp mainGo.cpp)
+#add_library(pricingservice STATIC main.cpp mainGo.cpp)
 
 add_library(hello STATIC test.c)
 

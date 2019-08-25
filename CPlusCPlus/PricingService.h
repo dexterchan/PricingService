@@ -23,7 +23,14 @@ extern "C"
         const long anticipatedRedemptionPeriod,
         const double anticipatedRedemptionAmount,
         const double anticipatedRedemptionNewMonthlyPayment);
-
+    API const char *GenerateLoanScheduleGo(
+        double amount,
+        const double interestYearlyRate,
+        const double insuranceYearlyRate,
+        const long durationYears,
+        const long anticipatedRedemptionPeriod,
+        const double anticipatedRedemptionAmount,
+        const double anticipatedRedemptionNewMonthlyPayment, int *ret_len);
     API void GenerateLoanScheduleNoOutput(
         double amount,
         const double interestYearlyRate,

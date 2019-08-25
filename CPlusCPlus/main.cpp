@@ -37,7 +37,7 @@ std::string formatPrice(double price)
 	return result.str();
 }
 
-const char *GenerateLoanSchedule(
+const std::string _GenerateLoanSchedule(
 	double amount,
 	const double interestYearlyRate,
 	const double insuranceYearlyRate,
@@ -112,8 +112,22 @@ const char *GenerateLoanSchedule(
 		   << "\"schedule\": [" << schedule.str() << "]"
 		   << "}";
 
-	resultStr = result.str();
-	return resultStr.c_str();
+	return result.str();
+}
+
+const char *GenerateLoanSchedule(
+	double amount,
+	const double interestYearlyRate,
+	const double insuranceYearlyRate,
+	const long durationYears,
+	const long anticipatedRedemptionPeriod,
+	const double anticipatedRedemptionAmount,
+	const double anticipatedRedemptionNewMonthlyPayment)
+{
+	std::string str = _GenerateLoanSchedule(amount, interestYearlyRate, insuranceYearlyRate,
+											durationYears, anticipatedRedemptionPeriod, anticipatedRedemptionAmount,
+											anticipatedRedemptionNewMonthlyPayment);
+	return str.c_str();
 }
 
 void GenerateLoanScheduleNoOutput(
@@ -139,5 +153,7 @@ int Hello()
 
 int main(void)
 {
-	std::cout << GenerateLoanSchedule(672550, 0.0102, 0.0013, 1, 19, 500000, 0) << std::endl;
+	int retSize = 0;
+	const char *ret = GenerateLoanScheduleGo(672550, 0.0102, 0.0013, 1, 19, 500000, 0, &retSize);
+	std::cout << ret << std::endl;
 }
