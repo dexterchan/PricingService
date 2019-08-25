@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <cstring>
 #include <sstream>
 #include <iostream>
 #include "PricingService.h"
