@@ -4,10 +4,13 @@ from flask_restful import Api, Resource, reqparse
 
 import json
 import time
+import platform
 
 app = Flask(__name__)
 api = Api(app)
-PricingServiceLib = cdll.LoadLibrary("./build/libLibPricingService.so")
+ext = "dylib" if(platform.system()=='Darwin') else "so" 
+
+PricingServiceLib = cdll.LoadLibrary("./CPlusCPlus/build/libpricingservice.{0}".format(ext))
 PricingServiceLib.GenerateLoanSchedule.argtypes = [
     c_double,
     c_double,

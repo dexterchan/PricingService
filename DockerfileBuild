@@ -1,8 +1,6 @@
-FROM debian:stable-slim as build-env
+FROM golang:1.12.9-stretch as build-env
 
-RUN apt-get update \
-    && apt-get -y install build-essential wget\
-    && apt-get -y clean
+WORKDIR /
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.14.1/cmake-3.14.1-Linux-x86_64.tar.gz
 RUN tar xzvf cmake-3.14.1-Linux-x86_64.tar.gz
 RUN mkdir -p /usr/src/app/
@@ -10,6 +8,7 @@ ENV PATH /cmake-3.14.1-Linux-x86_64/bin:$PATH
 
 ENV PATH /usr/src/app/PricingService:/usr/local/bin:$PATH
 
+RUN mkdir -p /usr/src/app/PricingService/build
 WORKDIR /usr/src/app/PricingService
 
 RUN mkdir -p CPlusCPlus
@@ -17,17 +16,13 @@ COPY CPlusCPlus ./CPlusCPlus
 COPY build.sh ./
 RUN sh build.sh
 
-FROM python:3.7-slim-stretch
+COPY main.go ./
+RUN go build -o pricingservice
+
+FROM debian:stretch-slim
 RUN mkdir -p /usr/src/app/PricingService/CPlusCPlus/build
-
 WORKDIR /usr/src/app/PricingService
-COPY requirements.txt ./
-COPY PricingService.py ./
-RUN  pip install -r requirements.txt
 COPY --from=build-env /usr/src/app/PricingService/CPlusCPlus/build/libpricingservice.so /usr/src/app/PricingService/CPlusCPlus/build
-
-CMD ["python3","PricingService.py"]
-
-
-
-
+COPY --from=build-env /usr/src/app/PricingService/pricingservice /usr/src/app/PricingService
+ENV LD_LIBRARY_PATH  /usr/src/app/PricingService/CPlusCPlus/build
+CMD ["help"]
