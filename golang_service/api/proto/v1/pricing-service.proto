@@ -1,0 +1,23 @@
+syntax = "proto3";
+package v1;
+
+message PriceRequest {
+  double notional = 1;
+  double interestYearlyRate = 2;
+  double insuranceYearlyRate = 3;
+  int64 durationYears = 4;
+  int64 anticipatedRedemptionPeriod = 5;
+  double anticipatedRedemptionAmount = 6;
+  double anticipatedRedemptionNewMonthlyPayment = 7;
+}
+
+message PriceResponse {
+    enum Status {
+        SUCCESS = 0;
+        FAIL = 1;
+    }
+    Status status=1;
+    string message = 2;
+}
+
+service PricingService { rpc Price(PriceRequest) returns (PriceResponse); }
