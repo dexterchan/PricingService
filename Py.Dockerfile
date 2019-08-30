@@ -19,14 +19,14 @@ RUN sh build.sh
 
 FROM python:3.7-slim-stretch
 RUN mkdir -p /usr/src/app/PricingService/CPlusCPlus/build
+RUN mkdir -p /usr/src/app/PricingService/python_service
 
 WORKDIR /usr/src/app/PricingService
-COPY requirements.txt ./
-COPY PricingService.py ./
-RUN  pip install -r requirements.txt
+COPY ./python_service ./python_service
+RUN  pip install -r python_service/requirements.txt
 COPY --from=build-env /usr/src/app/PricingService/CPlusCPlus/build/libpricingservice.so /usr/src/app/PricingService/CPlusCPlus/build
 
-CMD ["python3","PricingService.py"]
+CMD ["python3","python_service/PricingService.py"]
 
 
 
