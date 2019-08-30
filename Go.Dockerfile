@@ -29,6 +29,6 @@ WORKDIR /usr/src/app/PricingService
 COPY --from=build-env /usr/src/app/PricingService/CPlusCPlus/build/libpricingservice.so ./CPlusCPlus/build
 COPY --from=build-env /usr/src/app/PricingService/pricingservice .
 COPY --from=build-env /usr/src/app/PricingService/golang_service/bin .
-
+ENV PATH /usr/src/app/PricingService:/usr/local/bin:$PATH
 ENV LD_LIBRARY_PATH  /usr/src/app/PricingService/CPlusCPlus/build
 CMD ["help"]
