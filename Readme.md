@@ -12,5 +12,5 @@ go run cmd/client/Main.go -server=localhost:9090
 
 ## Run Go
 
-export LD_LIBRARY_PATH=./CPlusCPlus/build/
+export LD_LIBRARY_PATH=$(pwd)/CPlusCPlus/build/
 
